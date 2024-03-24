@@ -3,8 +3,10 @@
          *                                                       *
          *   Fast VGA(320*200*256) +-+ VGA.CPP made by X-prog    *
          *                                                       *
+         *   Author: Rui GonÃ§alves                               *
+         *                                                       *
          *   NOTE:Run in Real Mode and use 32-Bit operations.    *
-         *        To compile in BC5 you must do this             *
+         *        To compile in BC5 you must do this:            *
          *        bcc -3 -B -ml program.cpp                      *
          *                                                       *
          *    Example of program.cpp :                           *
@@ -18,20 +20,20 @@
          *    Used for fast 2D and 3D graphics on VGA dispaly    *
          *                                                       *
          *                                                       *
-         *  Author:Rui Jorge Pereira Gon‡alves (c) 1998 X-prog   *
+         *  Author:Rui Jorge Pereira Gonâ€¡alves (c) 1998 X-prog   *
          *********************************************************/
 
 #if defined (__TINY__)
-#error "Modelo de mem¢ria inv lido."
+#error "Modelo de memÂ¢ria invÂ lido."
 #endif
 
 
 #if defined (__SMALL__)
-#error "Modelo de mem¢ria inv lido."
+#error "Modelo de memÂ¢ria invÂ lido."
 #endif
 
 #if defined (__MEDIUM__)
-#error "Modelo de mem¢ria inv lido."
+#error "Modelo de memÂ¢ria invÂ lido."
 #endif
 
 #define word unsigned int
@@ -40,7 +42,7 @@
 
 
 /*--------------------------------------------------------------------------*/
-//----------------Static var veis
+//----------------Static varÂ veis
 char far *VIRTUAL_SCREEN; //for fast 2D-graphics
 int VS_SEG, VS_OFF; //seguemento e offset de *VIRTUAL_SCREEN
 int ON_3D=1, VGA_ON=1;  // (...=0)->ON (...!=0)->OFF
@@ -59,12 +61,12 @@ struct text_map
         {
         word X_size;  // tamanho x
         word Y_size;  // tamanho y
-        byte *map;    // bitmap (cada byte ‚ um pixel, independente das cores)
+        byte *map;    // bitmap (cada byte â€š um pixel, independente das cores)
         };
 
 struct point
         {
-        int x,y;                   //coodenadas no ecrÆ
+        int x,y;                   //coodenadas no ecrÃ†
         point(int xx,int yy) {x=xx;y=yy;}
         point(){x=0;y=0;}
         };
@@ -81,31 +83,31 @@ struct triangle
         };
 
 /*--------------------------------------------------------------------------*/
-// declara‡äes :
+// declaraâ€¡Ã¤es :
 
 //---------------activar / desactivar
 int DESACTIVATE_3D(void);
-// desactivar modo de acelara‡Æo 3D
+// desactivar modo de acelaraâ€¡Ã†o 3D
 int ACTIVATE_3D (void);
-// activar modo de acelara‡Æo 3D
+// activar modo de acelaraâ€¡Ã†o 3D
 int set_vga(void);
 // activar modo vga
 int set_text(void);
 // desactivar modo vga
 
-//---------------trabalhos directos com o ecrÆ
+//---------------trabalhos directos com o ecrÃ†
 void waitretrace(void);
-// esperar pelo retra‡amento vertical (60 FPS)
+// esperar pelo retraâ€¡amento vertical (60 FPS)
 void putpixel(short int X,short int Y,char Col);
-// por um pixel no ecrÆ
+// por um pixel no ecrÃ†
 void clean(char valor);
-// lipar o ecrÆ com a cor valor 
+// lipar o ecrÃ† com a cor valor 
 void putmem(char *mem);
-// por 64000 bytes no ecrÆ real
+// por 64000 bytes no ecrÃ† real
 
-//---------------trabalho com o ecrÆ virtual
+//---------------trabalho com o ecrÃ† virtual
 void back_to_screen(void);
-// por back_screen no ecrÆ real 
+// por back_screen no ecrÃ† real 
 void back_putmem(char *mem);
 // por 64000 bytes em back_screen
 void back_clean(char valor);
@@ -123,17 +125,17 @@ void setregister(int color,char green,char red,char blue);
 void setblockregister(int start,int max_colors,char *pal);
 // actualizar o R.G.B de um bloco de cores da palete
 
-//---------------trabalho com a mem¢ria
+//---------------trabalho com a memÂ¢ria
 void cpymem(char *dest,char *from,int bytes);
-// copia mem¢ria a 32-bits (int bytes -deve ser multiplo de 4)
+// copia memÂ¢ria a 32-bits (int bytes -deve ser multiplo de 4)
 void setmemo(char *p,char valor,int number);
-// setar mem¢ria a 32-bits (int number -deve ser multiplo de 4)
+// setar memÂ¢ria a 32-bits (int number -deve ser multiplo de 4)
 void setmemodb(char *p,char valor,int number);
-// setar mem¢ria a 8-bits (Mas bastante r pido!!)
+// setar memÂ¢ria a 8-bits (Mas bastante rÂ pido!!)
 void cpymemdb(char *dest,char *from,int bytes);
-// copiar mem¢ria a 8-bits (Mas bastante r pido!!)
+// copiar memÂ¢ria a 8-bits (Mas bastante rÂ pido!!)
 void cpymemnoz (char *dest,char *from,int bytes);
-// copiar mem¢ria a 8-bits avan‡ando nos zeros
+// copiar memÂ¢ria a 8-bits avanâ€¡ando nos zeros
 int pointer_OFF(void *p);
 // tirar offset de um apontador
 int pointer_SEG(void *p);
@@ -141,15 +143,15 @@ int pointer_SEG(void *p);
 
 //---------------Janelas
 void putwindow(char *p,int tx,int ty,int xs,int ys);
-// por uma janela directamente e rapidamente no ecrÆ.
-// (s¢ funciona bem com tamanhos multiplos de 4 e com toda a
-// janela dendro do ecrÆ)
+// por uma janela directamente e rapidamente no ecrÃ†.
+// (sÂ¢ funciona bem com tamanhos multiplos de 4 e com toda a
+// janela dendro do ecrÃ†)
 void putwindowmemnoz(char *dest,int dtx,int dty,char *from,int ftx,int fty,int wherex,int wherey);
-// no fundo ‚: por um "sprit" numa …rea de mem¢ria.
+// no fundo â€š: por um "sprit" numa â€¦rea de memÂ¢ria.
 void putwindowmem(char *dest,int dtx,int dty,char *from,int ftx,int fty,int wherex,int wherey);
-// por uma janela numa …rea de mem¢ria
+// por uma janela numa â€¦rea de memÂ¢ria
 
-//----------------Triƒngulos
+//----------------TriÆ’ngulos
 void ver_lados(void);
 int orientation (point &P,point &Q,point &R);
 
@@ -179,7 +181,7 @@ void fill_flat_tex_triangle (triangle &T);
 //em ground shading, com textutra
 
 /*--------------------------------------------------------------------------*/
-// Implementa‡Æo
+// Implementaâ€¡Ã†o
 
 int DESACTIVATE_3D(void)
 {
@@ -385,7 +387,7 @@ void back_putmem(char *mem)
     mov DS,AX;
 
 
-    mov CX,03e80h //c¢pia de mem¢ria
+    mov CX,03e80h //cÂ¢pia de memÂ¢ria
     rep movsd
 
     pop es        // repor o programa 
@@ -525,12 +527,12 @@ asm {
 }
 
 /*-------------------------------------------------------------------*/
-/* As fun‡äes seguintes nÆo sÆo de confian‡a...                      */
-/* A vantagem em utilizalas ‚ a super rapidez que possuem !!!        */
+/* As funâ€¡Ã¤es seguintes nÃ†o sÃ†o de confianâ€¡a...                      */
+/* A vantagem em utilizalas â€š a super rapidez que possuem !!!        */
 /*-------------------------------------------------------------------*/
 
 /* Very fast BUT NOT perfect*/
-/* ATEN€ÇO esta fun‡Æo s¢ trabalha bem se a janela estiver
+/* ATENâ‚¬Ã‡O esta funâ€¡Ã†o sÂ¢ trabalha bem se a janela estiver
    toda dentro do ecra e os tamanhos forem multiplos de 4*/
 void putwindow(char *p,int tx,int ty,int xs,int ys)
 {
@@ -559,7 +561,7 @@ asm {
     mov cx,bx
     rep movsd         // ; por a linha que tem bx DWORDS
     pop cx
-    add dx,320        // ;avan‡ar uma linha
+    add dx,320        // ;avanâ€¡ar uma linha
     mov DI,dx
     loop @label1      // ; repete ate por toda a janela
     pop es
@@ -570,8 +572,8 @@ asm {
 }
 
 /*Very fast but not perfect*/
-/* Esta fun‡Æo nÆo olha a erros.
-   ‚ aconselhavel que -int bytes- seja um numero multiplo de 4.*/   
+/* Esta funâ€¡Ã†o nÃ†o olha a erros.
+   â€š aconselhavel que -int bytes- seja um numero multiplo de 4.*/   
 void cpymem(char *dest,char *from,int bytes)
 {
      asm
@@ -602,7 +604,7 @@ void cpymem(char *dest,char *from,int bytes)
 }
 
 /*Very Fast but not perfect*/
-/* ‚ aconselhavel que -int number- seja um numero par*/
+/* â€š aconselhavel que -int number- seja um numero par*/
 void setmemo(char *p,char valor,int number)
 {
 asm{
@@ -908,7 +910,7 @@ void fill_flat_triangle (triangle &T){
         if (lines>200) lines=200;       //fim do poligno em y
         int i=tri[0].y;
         if (i<0) i=0;                   //inicio do poligno em y
-        if (tri[0].y>200 || tri[2].y<0) return; // se est  fora do ecrÆ sai
+        if (tri[0].y>200 || tri[2].y<0) return; // se estÂ  fora do ecrÃ† sai
         m2=(tri[1].y-tri[0].y)*(tri[2].x-tri[0].x);   //maior m:lado direito
         m1=(tri[2].y-tri[0].y)*(tri[1].x-tri[0].x);
 
@@ -987,7 +989,7 @@ void line_polytex_esq (int x1,int y1,int x2,int y2,
         }
 
         tx1=(tx1<<8);  // 2-bytes,2-bytes
-        ty1=(ty1<<8);  //  pixel , aproxima‡Æo
+        ty1=(ty1<<8);  //  pixel , aproximaâ€¡Ã†o
         tx2=(tx2<<8);
         ty2=(ty2<<8);
 
@@ -1056,7 +1058,7 @@ void line_polytex_dir (int x1,int y1,int x2,int y2,
         }
 
         tx1=(tx1<<8);  // 2-bytes,2-bytes
-        ty1=(ty1<<8);  //  pixel , aproxima‡Æo
+        ty1=(ty1<<8);  //  pixel , aproximaâ€¡Ã†o
         tx2=(tx2<<8);
         ty2=(ty2<<8);
 
@@ -1145,7 +1147,7 @@ void flat_tex_scanline (text_map &texture,int i,char light)
 
 
 void fill_flat_tex_triangle (triangle &T){
-        point tri[3],aux;   // coordenadas do ecrÆ
+        point tri[3],aux;   // coordenadas do ecrÃ†
         point mtri[3]; // coordenadas da textura
         tri[0]=T.A;tri[1]=T.B;tri[2]=T.C;
         mtri[0]=T.mA;mtri[1]=T.mB;mtri[2]=T.mC;
@@ -1164,7 +1166,7 @@ void fill_flat_tex_triangle (triangle &T){
         if (lines>200) lines=200;       //fim do poligno em y
         int i=tri[0].y;
         if (i<0) i=0;                   //inicio do poligno em y
-        if (tri[0].y>200 || tri[2].y<0) return; // se est  fora do ecrÆ sai
+        if (tri[0].y>200 || tri[2].y<0) return; // se estÂ  fora do ecrÃ† sai
 
 /*        long int m2=(tri[1].y-tri[0].y)*(tri[2].x-tri[0].x);   //maior m:lado direito
         long int m1=(tri[2].y-tri[0].y)*(tri[1].x-tri[0].x);
