@@ -1,0 +1,15 @@
+-- testar texture map (com graus de luz na palete)--
+
+Programa feito em bc++ 5.0
+
+teclas :
+
+'8'- o vertice dos 2 triangulos para CIMA
+'5'- o vertice dos 2 triangulos para BAIXO
+'4'- o vertice dos 2 triangulos para ESQUERDA
+'6'- o vertice dos 2 triangulos para DIREITA
+
+'+'- + luz
+'-'- - luz
+
+'Q'- sair
