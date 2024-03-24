@@ -1,0 +1,17 @@
+-- textura em triangulos feito em watcom c --
+(uma pequena aplicação em 3D )
+
+
+teclas :
+
+'8'- cima
+'5'-baixo
+'4'-esquerda
+'6'-direita
+
+'+'- aproximar
+'-'- afastar
+
+'t'- activar/desactivar texturamento
+
+'q'- sair 
