@@ -6,5 +6,6 @@ Example of texturing triangles with image in C/C++ using the library with 90% of
 my vga library 320*200 in DOS in 1998 :-)
 
 ![textura](https://github.com/rjpg/VGA-32-bit-mem-operations-for-486-DX-4-processors-/assets/22857941/dcbe1306-fe6f-44e9-8083-a63a1f8a4432)
+![tritexture](https://github.com/rjpg/VGA-32-bit-mem-operations-for-486-DX-4-processors-/assets/22857941/ae41cd51-a725-4603-aae9-d86223ba507b)
 
 Developed in 1998.
